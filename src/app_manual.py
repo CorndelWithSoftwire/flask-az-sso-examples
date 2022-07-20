@@ -13,10 +13,7 @@ login_manager.init_app(app)
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    url = f'https://login.microsoftonline.com/{os.getenv("AZ_TENANT_ID")}/oauth2/v2.0/authorize?'\
-        + f'client_id={os.getenv("AZ_CLIENT_ID")}' \
-        + f'&scope={os.getenv("AZ_API_SCOPE")}' \
-        + '&response_type=code'
+    url = get_auth_url()
     return redirect(url)
 
 @login_manager.user_loader
@@ -26,9 +23,7 @@ def load_user(user_id):
 @app.route("/login/azure/authorized")
 def authorised():
     code = request.args.get('code')
-    
     token = get_token_from_code(code)
-
     user_id = get_user_id(token)
     login_user(User(user_id))
     return redirect("/")
@@ -37,6 +32,12 @@ def authorised():
 @login_required
 def index():
     return "This is restricted content!"
+
+def get_auth_url():
+    return f'https://login.microsoftonline.com/{os.getenv("AZ_TENANT_ID")}/oauth2/v2.0/authorize?'\
+        + f'client_id={os.getenv("AZ_CLIENT_ID")}' \
+        + f'&scope={os.getenv("AZ_API_SCOPE")}' \
+        + '&response_type=code'
 
 def get_token_from_code(code):
     url = f'https://login.microsoftonline.com/{os.getenv("AZ_TENANT_ID")}/oauth2/v2.0/token'
