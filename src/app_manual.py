@@ -23,7 +23,7 @@ def unauthorized():
 def load_user(user_id):
     return User(user_id)
 
-@app.route("/auth/redirect")
+@app.route("/login/azure/authorized")
 def authorised():
     code = request.args.get('code')
     
