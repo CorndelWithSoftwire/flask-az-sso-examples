@@ -1,7 +1,6 @@
 import os
 from flask import Flask, redirect, request
 from flask_login import login_required, LoginManager, login_user
-from msal import ConfidentialClientApplication
 import requests
 
 from src.user import User
@@ -11,11 +10,6 @@ app.secret_key = os.getenv('SECRET_KEY')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-client_app = ConfidentialClientApplication(
-    client_id = os.getenv("AZ_CLIENT_ID"),
-    client_credential = os.getenv("AZ_CLIENT_SECRET"),
-    authority = f"https://login.microsoftonline.com/{os.getenv('AZ_TENANT_ID')}"
-)
 
 @login_manager.unauthorized_handler
 def unauthorized():
