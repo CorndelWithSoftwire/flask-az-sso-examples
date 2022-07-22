@@ -1,0 +1,22 @@
+services:
+  app_manual:
+    build: .
+    env_file: .env
+    environment:
+      - FLASK_APP=src/app_manual
+    ports:
+      - 5001:5000
+  app_msal:
+    build: .
+    env_file: .env
+    environment:
+      - FLASK_APP=src/app_msal
+    ports:
+      - 5002:5000
+  app_flask_dance:
+    build: .
+    env_file: .env
+    environment:
+      - FLASK_APP=src/app_flask_dance
+    ports:
+      - 5003:5000
