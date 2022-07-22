@@ -7,12 +7,8 @@ To set up the App Registration appropriately, first sign into the Azure portal, 
 * Create an App Registration; give it an appropriate name and set a "Web" redirect URI to: `http://localhost:5000/login/azure/authorized`
 * Note the tenant & client ids, and set them in a `.env` file following the `.env.template` pattern
 * Generate a client secret under the "Certificates & secrets" tab, and set it in the `.env` file
-* From the "Expose an API" tab:
-  * Click "set" to generate an Application ID URI
-  * Add a scope for reading user details, give it a sensible name/description for reading the user's identity, and allow both Admins & Users to consent
-  * Copy the scope (which by default will look something like `api://<GUID>/<scope_name>`) and add it to the `.env` file
 * From the "API Permissions" tab, you should already have a permission added for "User.Read"
-  * Grant consent for it using the "Grant admin consent for Tenant" option
+  * We will use this permission for now (through the `AZ_API_SCOPE` environment variable). If you need others, you can adjust them here
 
 ## The code
 Two separate approaches are demonstrated below; we generally recommend using a library over writing the code yourself to take advantage of others learnings and avoid tripping points, but a more manual approach is also included for comparison.
