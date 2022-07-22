@@ -23,7 +23,11 @@ See `src/app_manual.py` for the code for handling the flow fairly manually, simi
 See `src/app_flask_dance` for the code handling the flow through Flask Dance - [for which more details can be found here](https://flask-dance.readthedocs.io/en/v1.0.0/quickstarts/azure.html).
 
 ### Running the code
-To run the examples, the easiest approach is using Docker; simply set up the `.env` file and then run `docker compose up --build`: you should find the three apps are running locally on:
+To run the examples, the easiest approach is using Docker; simply set up the `.env` file and then run:
+```docker compose up --build```
+
+You should find the three apps are running locally on:
+
 * Port 5001 - Manually handled approach
 * Port 5002 - MSAL approach
 * Port 5003 - Flask Dance approach
